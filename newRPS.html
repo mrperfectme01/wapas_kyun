@@ -52,23 +52,29 @@
     <p class="line-one">Rock Paper Scissors</p>
 
     <button class="rocky" onclick="
-     playGame('rock');
+     playGame('Rock');
+     document.getElementById('buton').play();
     ">
+    <audio id="buton" src="buton.mp3" preload="auto"></audio>
     <img src="htmlcss/rock-emoji.png" class="rock-emo"></button>
 
     <button class="papery" onclick="
-    playGame('paper');
+    playGame('Paper');
+    document.getElementById('buton').play();
     ">
+    <audio id="buton" src="buton.mp3" preload="auto"></audio>
     <img src= "htmlcss/paper-emoji.png" class="paper-emo" ></button>
 
     <button class="Scissory" onclick="
-    playGame('scissors');
+    playGame('Scissors');
+    document.getElementById('buton').play();
     " >
+    <audio id="buton" src="buton.mp3" preload="auto"></audio>
     <img src="htmlcss/scissors-emoji.png" class="scissory-emo"></button>
 
     <p class="lst-line"></p>
     <p class="last-line"></p>
-    <p class="js-score"></p>
+    <p class="js-score"></p>0
     <button class="rs-buton" onclick="
     Score.wins=0;
     Score.losses=0;
@@ -80,27 +86,27 @@
       function playGame(playerMove) {
       const compVar = pickCompMove();
       let result = '';  
-      if(playerMove==='scissors'){if(compVar === 'rock'){
+      if(playerMove==='Scissors'){if(compVar === 'Rock'){
         result = 'You Lose';
-      }else if(compVar==='paper'){
+      }else if(compVar==='Paper'){
         result = 'You win';
-      } else if(compVar==='scissors'){
+      } else if(compVar==='Scissors'){
         result = 'You Tie';
       }
-      }else if(playerMove==='paper'){
-              if(compVar === 'rock'){
+      }else if(playerMove==='Paper'){
+              if(compVar === 'Rock'){
         result = 'You win';
-      }else if(compVar==='paper'){
+      }else if(compVar==='Paper'){
         result = 'You Tie';
-      } else if(compVar==='scissors'){
+      } else if(compVar==='Scissors'){
         result = 'You Lose';
       }
-      }else if(playerMove==='rock'){
-      if(compVar === 'rock'){
+      }else if(playerMove==='Rock'){
+      if(compVar === 'Rock'){
         result = 'You Tie';
-      }else if(compVar==='paper'){
+      }else if(compVar==='Paper'){
         result = 'You Lose';
-      } else if(compVar==='scissors'){
+      } else if(compVar==='Scissors'){
         result = 'You win';
       }
       }
@@ -129,16 +135,15 @@
       document.querySelector('.js-score').innerHTML = `Wins: ${Score.wins} , Losses: ${Score.losses} ,Ties: ${Score.ties}`;
       }
 
-
       function pickCompMove() {
       const randNum = Math.random();
       let compVar='';
       if (randNum >0 && randNum < 1/3) {
-        compVar = 'rock';
+        compVar = 'Rock';
         }else if(randNum > 1/3 && randNum < 2/3) {
-          compVar = 'paper';
+          compVar = 'Paper';
         } else if(randNum >2/3 && randNum <1) {
-          compVar = 'scissors'
+          compVar = 'Scissors'
         } 
         return compVar;
       }
