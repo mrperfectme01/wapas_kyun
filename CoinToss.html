@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coin Toss</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+SC&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, rgba(38, 165, 67, 1), rgb(2, 60, 2));
+      display: grid;
+      grid-template-rows: 1fr;
+    }
+
+    .main {
+      display: grid;
+      place-items: center;
+    }
+
+    .x1 {
+      text-align: center;
+      font-family: 'Alumni Sans SC', sans-serif;
+      font-size: 60px;
+      font-weight: 700;
+      background: linear-gradient(to bottom, white, gray);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .b2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 50px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 100px;
+      background-color: transparent;
+    }
+
+    /* 🛠️ Fade-in video styling */
+    #coinVideo {
+      width: 300px;
+      height: 200px;
+      border-radius: 10px;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <p class="x1">THE COIN TOSS</p>
+
+    <!-- Buttons -->
+    <div class="b2" id="buttons">
+      <button onclick="TossRes()">
+        <img src="heads.png" alt="heads">
+      </button>
+      <button onclick="TossRes()">
+        <img src="tails.png" alt="tails">
+      </button>
+    </div>
+
+    <!-- Video Wrapper -->
+    <div id="videoWrapper" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+      <video id="coinVideo" autoplay muted></video>
+    </div>
+
+    <!-- Result Text -->
+    <p id="resultText" style="color:white; font-size: 28px; font-family: Arial; display: none;"></p>
+
+    <!-- Play Again Button -->
+    <button id="playAgain" style="display: none; padding: 10px 20px; font-size: 18px; border-radius: 10px; border: none; cursor: pointer;" onclick="resetGame()">Play Again</button>
+  </div>
+
+  <script>
+    function TossRes() {
+      const rand = Math.random();
+      const result = rand < 0.5 ? 'heads' : 'tails';
+
+      // Hide buttons
+      document.getElementById("buttons").style.display = "none";
+
+      // Show video
+      const video = document.getElementById("coinVideo");
+      video.src = result + ".mp4";
+      video.style.visibility = "visible";
+      video.style.opacity = "1";
+      video.play();
+
+      video.onended = function () {
+        const resultText = document.getElementById("resultText");
+        resultText.textContent = result === 'heads' ? "You Win!" : "You Lose!";
+        resultText.style.display = "block";
+
+        document.getElementById("playAgain").style.display = "block";
+      };
+    }
+
+    function resetGame() {
+      const video = document.getElementById("coinVideo");
+      video.style.visibility = "hidden";
+      video.style.opacity = "0";
+
+      document.getElementById("resultText").style.display = "none";
+      document.getElementById("playAgain").style.display = "none";
+      document.getElementById("buttons").style.display = "grid";
+    }
+  </script>
+</body>
+</html>
